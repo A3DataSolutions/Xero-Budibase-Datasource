@@ -1,0 +1,101 @@
+{
+  "type": "datasource",
+  "metadata": {},
+  "schema": {
+    "docs": "https://developer.xero.com/",
+    "friendlyName": "Xero",
+    "type": "API",
+    "description": "Performs a XERO api calls",
+    "datasource": {
+      "client_id": {
+        "type": "string",
+        "required": true
+      },
+      "client_secret": {
+        "type": "password",
+        "required": true
+      },
+      "tenant_id": {
+        "type": "string",
+        "required": true
+      },
+      "redirect_url": {
+        "type": "string",
+        "required": true
+      },
+      "scopes": {
+        "type": "string",
+        "required": true
+      },
+      "app_id": {
+        "type": "string",
+        "display": "App ID no prefix",
+        "required": false
+      },
+      "datasource_id": {
+        "type": "string",
+        "display": "Datasource ID no prefix",
+        "required": false
+      },
+      "token_set": {
+        "type": "object",
+        "required": false
+      }
+    },
+    "query": {
+      "read": {
+        "type": "fields",
+        "fields": {
+          "id": {
+            "display": "ID",
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "list": {
+        "type": "fields",
+        "fields": {
+          "queryString": {
+            "display": "Query string",
+            "type": "string",
+            "required": false
+          }
+        }
+      },
+      "oauthBuildConsentUrl": {
+        "type": "json"
+      },
+      "oauthGetTokenSet": {
+        "type": "fields",
+        "fields": {
+          "url": {
+            "display": "url",
+            "type": "string",
+            "required": true
+          }
+        }
+      },
+      "oauthRefreshToken": {
+        "type": "json"
+      }
+    },
+    "extra": {
+      "endpoint": {
+        "displayName": "Endpoint",
+        "type": "list",
+        "required": true,
+        "data": {
+          "read": [
+            "Invoices",
+            "Repeating Invoices"
+          ],
+          "list": [
+            "Invoices",
+            "Repeating Invoices"
+          ]
+        }
+      }
+    }
+  }
+}
