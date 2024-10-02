@@ -100,8 +100,8 @@ class CustomIntegration implements IntegrationBase {
         let curr_token_set = await this.xero.apiCallback(query.url)
         await this.updateTokensInDb(curr_token_set)
       }
-      catch (e) {
-        throw Error("Unable to retreive tokens and update database ".concat(e))
+      catch (error) {
+        throw Error("Unable to retreive tokens and update database ".concat(error as string))
       }
     }
     return [{"Status":"Updated Sucessfully"}]
