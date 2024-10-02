@@ -60,18 +60,12 @@ class CustomIntegration implements IntegrationBase {
     });
 
 
-    if (!(Object.keys(this.token_set).length === 0)){
+    if (this.token_set && !(Object.keys(this.token_set).length === 0)){
         this.xero.setTokenSet(new TokenSet(this.token_set))
         if (this.expired_bool){
           this.oauthRefreshToken()
         }
     }
-    else {
-        throw Error('Token not set. Complete XERO OAuth Login Process')
-    }
-    
-
-    
   }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
@@ -89,7 +83,7 @@ class CustomIntegration implements IntegrationBase {
 
 
   async oauthBuildConsentUrl() {
-    return [await this.xero.buildConsentUrl()]
+    return await this.xero.buildConsentUrl()
   }
 
   async oauthGetTokenSet(query: { url: string }) {
@@ -152,7 +146,7 @@ class CustomIntegration implements IntegrationBase {
       return invoice.body
     }
     else if (query.extra.endpoint == "Repeating Invoices"){
-      let repeating_invoice = await this.xero.accountingApi.getRepeatingInvoice(this.tenant_id, query.id));
+      let repeating_invoice = await this.xero.accountingApi.getRepeatingInvoice(this.tenant_id, query.id);
       return repeating_invoice.body
     }
     else {

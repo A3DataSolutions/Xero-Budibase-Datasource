@@ -8,12 +8,11 @@ Find out more about [Budibase](https://github.com/Budibase/budibase).
 
 ## Instructions
 
-To build your new  plugin run the following in your Budibase CLI:
-```
-budi plugins --build
-```
+This XERO plugin authenticates using OAUth and should be used in conjuction with the Xero Panel.
 
-You can also re-build everytime you make a change to your plugin with the command:
-```
-budi plugins --watch
-```
+A custom screen should be created which does the following 
+- Provides consent URL
+- XERO should redirect user back to budibase xero screen
+- URL will be parsed by XERO panel 
+- The after/before submit button action should be set up to insert value into database
+- Refresh token query should be called periodically and will also be called when object is constructed
