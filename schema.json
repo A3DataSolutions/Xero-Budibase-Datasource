@@ -38,7 +38,7 @@
         "required": false
       },
       "couchdb_url": {
-        "type": "string",
+        "type": "password",
         "display": "Couch DB URL",
         "required": false
       },
