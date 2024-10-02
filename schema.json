@@ -37,6 +37,11 @@
         "display": "Datasource ID no prefix",
         "required": false
       },
+      "couchdb_url": {
+        "type": "string",
+        "display": "Couch DB URL",
+        "required": false
+      },
       "token_set": {
         "type": "object",
         "required": false

@@ -31,6 +31,7 @@ class CustomIntegration implements IntegrationBase {
   private readonly redirect_url:string
   private consent_url: string
   private readonly scopes: string
+  private readonly couch_db_url: string
   private readonly xero: XeroClient
 
   private readonly app_id: string;
@@ -39,7 +40,7 @@ class CustomIntegration implements IntegrationBase {
   private expired_bool: boolean;
 
 
-  constructor(config:{ client_id:string, client_secret:string, redirect_url:string, tenant_id: string, scopes:string, app_id:string, datasource_id:string, token_set: TokenSetParameters}) {
+  constructor(config:{ client_id:string, client_secret:string, redirect_url:string, tenant_id: string, scopes:string, app_id:string, datasource_id:string, couch_db_url:string, token_set: TokenSetParameters}) {
     this.token_set = config.token_set
 
     this.consent_url = ""
@@ -50,6 +51,7 @@ class CustomIntegration implements IntegrationBase {
     this.app_id = config.app_id
     this.datasource_id = config.datasource_id
     this.scopes = config.scopes
+    this.couch_db_url = config.couch_db_url
     this.expired_bool = new TokenSet(this.token_set).expired() ?? false // Might be needed later
 
     this.xero = new XeroClient({
@@ -69,7 +71,7 @@ class CustomIntegration implements IntegrationBase {
   }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
-    const curr_nano = nano(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@localhost:5984`); // Replace with your CouchDB URL
+    const curr_nano = nano(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@${this.couch_db_url}`); // Replace with your CouchDB URL
     let databases = [`app_dev_${this.app_id}`,`app_${this.app_id}`]
     for (var i = 0; i < databases.length; i++) {
       let db = curr_nano.db.use(databases[i])
