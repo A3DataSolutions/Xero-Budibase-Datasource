@@ -71,7 +71,7 @@ class CustomIntegration implements IntegrationBase {
   }
 
   async showVars(){
-    return [process.env.COUCHDB_USER, process.env.COUCHDB_PASSWORD]
+    return [process.env.COUCHDB_USER ?? 'TEST', process.env.COUCHDB_PASSWORD ?? 'BEST']
   }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
