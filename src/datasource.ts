@@ -70,12 +70,12 @@ class CustomIntegration implements IntegrationBase {
     }
   }
 
-  async showVars(){
-    return [process.env.COUCHDB_USER ?? 'TEST', process.env.COUCHDB_PASSWORD ?? 'BEST']
-  }
+  // async showVars(){
+  //   return [process.env.COUCHDB_USER ?? 'TEST', process.env.COUCHDB_PASSWORD ?? 'BEST']
+  // }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
-    const curr_nano = nano(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@${this.couch_db_url}`); // Replace with your CouchDB URL
+    const curr_nano = nano(`${this.couch_db_url}`); // Replace with your CouchDB URL
     let databases = [`app_dev_${this.app_id}`,`app_${this.app_id}`]
     for (var i = 0; i < databases.length; i++) {
       let db = curr_nano.db.use(databases[i])
@@ -89,8 +89,7 @@ class CustomIntegration implements IntegrationBase {
 
 
   async oauthBuildConsentUrl() {
-    return await this.showVars()
-    // return await this.xero.buildConsentUrl()
+    return await this.xero.buildConsentUrl()
   }
 
   async oauthGetTokenSet(query: { url: string }) {
