@@ -89,8 +89,8 @@ class CustomIntegration implements IntegrationBase {
 
 
   async oauthBuildConsentUrl() {
-    return this.showVars()
-    return await this.xero.buildConsentUrl()
+    return await this.showVars()
+    // return await this.xero.buildConsentUrl()
   }
 
   async oauthGetTokenSet(query: { url: string }) {
