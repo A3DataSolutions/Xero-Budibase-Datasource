@@ -1,6 +1,6 @@
 {
   "name": "a3-xero-datasource",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "A datasource to interact with XERO api",
   "main": "src/index.ts",
   "license": "MIT",
