@@ -51,7 +51,7 @@ class CustomIntegration implements IntegrationBase {
     this.app_id = config.app_id
     this.datasource_id = config.datasource_id
     this.scopes = config.scopes
-    this.couch_db_url = "test"
+    this.couch_db_url = config.couch_db_url
     this.expired_bool = new TokenSet(this.token_set).expired() ?? false // Might be needed later
 
     this.xero = new XeroClient({

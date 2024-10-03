@@ -37,7 +37,7 @@
         "display": "Datasource ID no prefix",
         "required": false
       },
-      "couchdb_url": {
+      "couch_db_url": {
         "type": "password",
         "display": "Couch DB URL",
         "required": false
