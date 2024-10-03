@@ -70,9 +70,9 @@ class CustomIntegration implements IntegrationBase {
     }
   }
 
-  // async showVars(){
-  //   return [process.env.COUCHDB_USER ?? 'TEST', process.env.COUCHDB_PASSWORD ?? 'BEST']
-  // }
+  async showVars(){
+    return [this.couch_db_url]
+  }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
     const curr_nano = nano({url:this.couch_db_url,parseUrl: false}); // Replace with your CouchDB URL

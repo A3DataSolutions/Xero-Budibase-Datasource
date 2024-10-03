@@ -71,6 +71,9 @@
       "oauthBuildConsentUrl": {
         "type": "json"
       },
+      "showVars": {
+        "type": "json"
+      },
       "oauthGetTokenSet": {
         "type": "fields",
         "fields": {
