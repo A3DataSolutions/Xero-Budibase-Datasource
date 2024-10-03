@@ -1,6 +1,6 @@
 {
   "name": "a3-xero-datasource",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A datasource to interact with XERO api",
   "main": "src/index.ts",
   "license": "MIT",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@budibase/types": "^2.0.13",
     "express": "^4.21.0",
-    "nano": "^10.1.4",
+    "nano": "10.1.4",
     "node-fetch": "^2",
     "xero-node": "^9.2.0"
   },
