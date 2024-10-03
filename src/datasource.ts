@@ -73,7 +73,7 @@ class CustomIntegration implements IntegrationBase {
   }
 
   async showVars(){
-    return [this.couch_db_url, this.couch_db_creds]
+    return [this.couch_db_url, this.couch_db_creds ?? 'NO CREDS']
   }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
