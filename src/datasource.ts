@@ -93,8 +93,6 @@ class CustomIntegration implements IntegrationBase {
   }
 
   async oauthGetTokenSet(query: { url: string }) {
-    return [this.couch_db_url]
-
     if (query.url == "default") {
       return ["Please enter a valid url"]
     }
