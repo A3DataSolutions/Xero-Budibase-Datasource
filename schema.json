@@ -38,8 +38,13 @@
         "required": false
       },
       "couch_db_url": {
-        "type": "password",
+        "type": "text",
         "display": "Couch DB URL",
+        "required": false
+      },
+      "couch_db_creds": {
+        "type": "password",
+        "display": "Couch DB Creds",
         "required": false
       },
       "token_set": {

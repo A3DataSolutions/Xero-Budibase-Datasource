@@ -32,6 +32,7 @@ class CustomIntegration implements IntegrationBase {
   private consent_url: string
   private readonly scopes: string
   private readonly couch_db_url: string
+  private readonly couch_db_creds: string
   private readonly xero: XeroClient
 
   private readonly app_id: string;
@@ -40,7 +41,7 @@ class CustomIntegration implements IntegrationBase {
   private expired_bool: boolean;
 
 
-  constructor(config:{ client_id:string, client_secret:string, redirect_url:string, tenant_id: string, scopes:string, app_id:string, datasource_id:string, couch_db_url:string, token_set: TokenSetParameters}) {
+  constructor(config:{ client_id:string, client_secret:string, redirect_url:string, tenant_id: string, scopes:string, app_id:string, datasource_id:string, couch_db_url:string, couch_db_creds:string, token_set: TokenSetParameters}) {
     this.token_set = config.token_set
 
     this.consent_url = ""
@@ -52,6 +53,7 @@ class CustomIntegration implements IntegrationBase {
     this.datasource_id = config.datasource_id
     this.scopes = config.scopes
     this.couch_db_url = config.couch_db_url
+    this.couch_db_creds = config.couch_db_creds
     this.expired_bool = new TokenSet(this.token_set).expired() ?? false // Might be needed later
 
     this.xero = new XeroClient({
@@ -71,7 +73,7 @@ class CustomIntegration implements IntegrationBase {
   }
 
   async showVars(){
-    return [this.couch_db_url]
+    return [this.couch_db_url, this.couch_db_creds]
   }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
