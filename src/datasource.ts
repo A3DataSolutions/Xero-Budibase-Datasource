@@ -32,7 +32,8 @@ class CustomIntegration implements IntegrationBase {
   private consent_url: string
   private readonly scopes: string
   private readonly couch_db_url: string
-  private readonly couch_db_creds: string
+  private readonly couch_db_user: string
+  private readonly couch_db_password: string
   private readonly xero: XeroClient
 
   private readonly app_id: string;
@@ -41,7 +42,7 @@ class CustomIntegration implements IntegrationBase {
   private expired_bool: boolean;
 
 
-  constructor(config:{ client_id:string, client_secret:string, redirect_url:string, tenant_id: string, scopes:string, app_id:string, datasource_id:string, couch_db_url:string, couch_db_creds:string, token_set: TokenSetParameters}) {
+  constructor(config:{ client_id:string, client_secret:string, redirect_url:string, tenant_id: string, scopes:string, app_id:string, datasource_id:string, couch_db_url:string, couch_db_user:string, couch_db_password:string, token_set: TokenSetParameters}) {
     this.token_set = config.token_set
 
     this.consent_url = ""
@@ -53,7 +54,9 @@ class CustomIntegration implements IntegrationBase {
     this.datasource_id = config.datasource_id
     this.scopes = config.scopes
     this.couch_db_url = config.couch_db_url
-    this.couch_db_creds = config.couch_db_creds
+    this.couch_db_user = config.couch_db_user
+    this.couch_db_password = config.couch_db_password
+
     this.expired_bool = new TokenSet(this.token_set).expired() ?? false // Might be needed later
 
     this.xero = new XeroClient({
@@ -73,11 +76,12 @@ class CustomIntegration implements IntegrationBase {
   }
 
   async showVars(){
-    return [{url:`${this.couch_db_creds}@${this.couch_db_url}`,parseUrl: false}]
+    return [{url:`${this.couch_db_user}:${this.couch_db_password}@${this.couch_db_url}`,parseUrl: false}]
   }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
-    const curr_nano = nano({url:`${this.couch_db_creds}@${this.couch_db_url}`,parseUrl: false}); // Replace with your CouchDB URL
+    const curr_nano = nano({url:this.couch_db_url,parseUrl: false}); // Replace with your CouchDB URL
+    await curr_nano.auth(this.couch_db_user, this.couch_db_password)
     let databases = [`app_dev_${this.app_id}`,`app_${this.app_id}`]
     for (var i = 0; i < databases.length; i++) {
       let db = curr_nano.db.use(databases[i])

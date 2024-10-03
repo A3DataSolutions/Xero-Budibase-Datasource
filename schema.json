@@ -42,9 +42,14 @@
         "display": "Couch DB URL",
         "required": false
       },
-      "couch_db_creds": {
+      "couch_db_user": {
         "type": "password",
-        "display": "Couch DB Creds",
+        "display": "Couch DB User",
+        "required": false
+      },
+      "couch_db_password": {
+        "type": "password",
+        "display": "Couch DB Password",
         "required": false
       },
       "token_set": {
