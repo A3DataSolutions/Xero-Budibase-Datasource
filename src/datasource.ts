@@ -77,7 +77,7 @@ class CustomIntegration implements IntegrationBase {
   }
 
   async updateTokensInDb(curr_token_set:TokenSetParameters){
-    const curr_nano = nano({url:this.couch_db_url,parseUrl: false}); // Replace with your CouchDB URL
+    const curr_nano = nano({url:`${this.couch_db_creds}@${this.couch_db_url}`,parseUrl: false}); // Replace with your CouchDB URL
     let databases = [`app_dev_${this.app_id}`,`app_${this.app_id}`]
     for (var i = 0; i < databases.length; i++) {
       let db = curr_nano.db.use(databases[i])
